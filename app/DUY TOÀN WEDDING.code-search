@@ -1,0 +1,18 @@
+# Query: Lumière Studio
+# ContextLines: 1
+
+3 results - 2 files
+
+app\components\Footer.tsx:
+   5          <div>
+   6:           <h3 className="text-xl font-semibold">DUY TOÀN WEDDING</h3>
+   7  
+
+  48        <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-6 text-sm text-white/50">
+  49:         © 2026 DUY TOÀN WEDDING. All rights reserved.
+  50        </div>
+
+app\components\Header.tsx:
+  5          <a href="/" className="text-xl font-semibold tracking-wide text-[#1F1F1F]">
+  6:           DUY TOÀN WEDDING
+  7          </a>
