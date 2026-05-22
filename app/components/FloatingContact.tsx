@@ -9,7 +9,7 @@ export default function FloatingContact() {
       </a>
 
       <a
-        href="https://zalo.me/0924 733 777"
+        href="https://zalo.me/0924733777"
         target="_blank"
         rel="noopener noreferrer"
         className="rounded-full bg-[#0068FF] px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:opacity-90"

@@ -1,10 +1,28 @@
 const albums = [
-  "Concept Hàn Quốc",
-  "Concept Luxury",
-  "Concept Ngoại cảnh",
-  "Concept Áo dài",
-  "Concept Biển",
-  "Concept Cổ điển",
+  {
+    title: "Album ảnh cưới 01",
+    image: "/images/wedding-1.jpg",
+  },
+  {
+    title: "Album ảnh cưới 02",
+    image: "/images/wedding-2.jpg",
+  },
+  {
+    title: "Album ảnh cưới 03",
+    image: "/images/wedding-3.jpg",
+  },
+  {
+    title: "Album ảnh cưới 04",
+    image: "/images/wedding-4.jpg",
+  },
+  {
+    title: "Album ảnh cưới 05",
+    image: "/images/wedding-5.jpg",
+  },
+  {
+    title: "Album ảnh cưới 06",
+    image: "/images/wedding-6.jpg",
+  },
 ];
 
 export default function AlbumPage() {
@@ -19,26 +37,31 @@ export default function AlbumPage() {
           Album ảnh cưới
         </h1>
 
-        <p className="mt-5 max-w-2xl text-neutral-600">
-          Những bộ ảnh cưới được thực hiện với phong cách tự nhiên, sang trọng
-          và giàu cảm xúc.
+        <p className="mt-5 max-w-2xl leading-8 text-neutral-600">
+          Những bộ ảnh cưới được Duy Toàn Wedding thực hiện với phong cách tự
+          nhiên, sang trọng và giàu cảm xúc.
         </p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {albums.map((album, index) => (
+          {albums.map((album) => (
             <div
-              key={album}
-              className="overflow-hidden rounded-[2rem] bg-white shadow-sm"
+              key={album.title}
+              className="group overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
             >
-              <div className="flex h-72 items-center justify-center bg-[#E8DED1] text-neutral-500">
-                Ảnh album {index + 1}
+              <div className="overflow-hidden">
+                <img
+                  src={album.image}
+                  alt={album.title}
+                  className="h-80 w-full object-cover transition duration-500 group-hover:scale-105"
+                />
               </div>
 
               <div className="p-6">
-                <h2 className="text-xl font-semibold">{album}</h2>
+                <h2 className="text-xl font-semibold">{album.title}</h2>
+
                 <p className="mt-2 text-sm leading-6 text-neutral-600">
                   Bộ ảnh cưới tinh tế dành cho các cặp đôi yêu thích sự nhẹ
-                  nhàng và cảm xúc.
+                  nhàng, chỉn chu và cảm xúc.
                 </p>
               </div>
             </div>

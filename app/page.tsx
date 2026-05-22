@@ -31,7 +31,32 @@ const albums = [
     image: "/images/album-6.jpg",
   },
 ];
-
+const weddingAlbums = [
+  {
+    title: "Album cưới 01",
+    image: "/images/wedding-1.jpg",
+  },
+  {
+    title: "Album cưới 02",
+    image: "/images/wedding-2.jpg",
+  },
+  {
+    title: "Album cưới 03",
+    image: "/images/wedding-3.jpg",
+  },
+  {
+    title: "Album cưới 04",
+    image: "/images/wedding-4.jpg",
+  },
+  {
+    title: "Album cưới 05",
+    image: "/images/wedding-5.jpg",
+  },
+  {
+    title: "Album cưới 06",
+    image: "/images/wedding-6.jpg",
+  },
+];
 const process = [
   "Tư vấn concept",
   "Chọn gói chụp",

@@ -56,6 +56,23 @@ export default function ContactPage() {
                 <p>Thứ 7 - Chủ nhật: 8:00 - 21:00</p>
                 <p>Vui lòng đặt lịch trước để được tư vấn tốt nhất.</p>
               </div>
+              <div className="overflow-hidden rounded-[2rem] border border-neutral-200">
+  <iframe
+    src="https://www.google.com/maps?q=10%20Tr%E1%BA%A7n%20%C4%90%C3%ACnh%20Ch%C3%A2u%2C%20Ho%C3%A0i%20%C3%82n%2C%20Gia%20Lai&output=embed"
+    className="h-80 w-full"
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  />
+</div>
+
+<a
+  href="https://www.google.com/maps/search/?api=1&query=10%20Tr%E1%BA%A7n%20%C4%90%C3%ACnh%20Ch%C3%A2u%2C%20Ho%C3%A0i%20%C3%82n%2C%20Gia%20Lai"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block rounded-full bg-[#1F1F1F] px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-black"
+>
+  Xem đường đi trên Google Maps
+</a>
             </div>
           </div>
         </div>

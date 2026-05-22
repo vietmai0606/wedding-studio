@@ -47,7 +47,7 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-6 text-sm text-white/50">
-        © 2026 DUY TOÀN WEDDING. All rights reserved.
+        © 2026 DUY TOÀN WEDDING Design by VIETMAI . All rights reserved.
       </div>
     </footer>
   );
