@@ -6,7 +6,7 @@ export default function FloatingContact() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-5 right-5 z-[70]">
+    <div className="fixed bottom-5 right-5 z-[70] flex flex-col items-end">
       {open && (
         <div className="mb-4 flex flex-col items-end gap-3">
           <a
@@ -45,18 +45,18 @@ export default function FloatingContact() {
         </div>
       )}
 
-      <div className="flex items-center gap-3">
+      <div className="flex h-14 items-center gap-3">
         {!open && (
-          <div className="relative rounded-full bg-white px-5 py-3 text-sm font-medium text-[#1F1F1F] shadow-lg">
+          <div className="relative flex h-11 items-center rounded-full bg-white px-5 text-sm font-semibold text-[#1F1F1F] shadow-lg">
             Liên hệ
-            <span className="absolute -right-1 top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 bg-white" />
+            <span className="absolute -right-[5px] top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 bg-white" />
           </div>
         )}
 
         <button
           type="button"
           onClick={() => setOpen((prev) => !prev)}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#8f8f8f] text-2xl text-white shadow-xl transition hover:scale-105 hover:bg-[#777]"
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#8f8f8f] text-2xl text-white shadow-xl transition-colors hover:bg-[#777]"
           aria-label="Mở liên hệ nhanh"
         >
           {open ? "×" : "💬"}
