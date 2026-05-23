@@ -162,7 +162,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/50 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Duy Toàn Wedding. All rights reserved.</p>
+          <p>© 2026 Duy Toàn Wedding design by VIETMAI. All rights reserved.</p>
 
           <p>Studio chụp ảnh cưới tại Hoài Ân, Gia Lai.</p>
         </div>
