@@ -2,7 +2,7 @@ const googleFormUrl = "https://byvn.net/xB3I";
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-white px-6 py-32 text-[#1F1F1F]">
+    <main className="min-h-screen bg-[#FAF7F2] px-6 pt-40 pb-32 text-[#1F1F1F]">
       <section className="mx-auto grid max-w-7xl gap-12 md:grid-cols-2">
         <div>
           <p className="text-sm uppercase tracking-[0.35em] text-[#B99A5F]">

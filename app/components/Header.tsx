@@ -4,6 +4,8 @@ import { useState } from "react";
 
 export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileAlbumOpen, setMobileAlbumOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
 
   function handleSearch() {
@@ -60,32 +62,56 @@ export default function Header() {
     window.location.href = "/album";
   }
 
+  const studioAlbums = [
+    "Signature Concept",
+    "Sample Concept",
+    "Collection",
+    "Beauty",
+    "Gia đình",
+    "Creative Style",
+    "Phim Trường",
+    "Phóng Sự Cưới",
+  ];
+
+  const outdoorAlbums = [
+    "Sài Gòn",
+    "Đà Lạt",
+    "Vĩnh Hy / Phú Quốc",
+    "Hồ Cốc / Vũng Tàu / Phan Thiết",
+    "Bình Dương",
+    "Mỹ Tho",
+    "Buôn Ma Thuột",
+  ];
+
   return (
     <header className="fixed left-0 top-0 z-50 w-full bg-white shadow-sm">
-      <div className="bg-[#8f8f8f] px-6 py-2 text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-start gap-6 text-xs font-medium md:text-sm">
-          <a href="tel:+84924733777" className="transition hover:text-white/80">
-            0924 733 777
-          </a>
+     <div className="bg-[#8f8f8f] px-4 py-2 text-white">
+  <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 text-[11px] font-medium sm:text-xs md:justify-start md:text-sm">
+    <a
+      href="tel:+84924733777"
+      className="shrink-0 transition hover:text-white/80"
+    >
+      0924 733 777
+    </a>
 
-          <span className="hidden h-4 w-px bg-white/40 sm:block" />
+    <span className="text-white/60">|</span>
 
-          <span className="line-clamp-1">
-            10 Trần Đình Châu, X. Hoài Ân, T. Gia Lai
-          </span>
-        </div>
-      </div>
+    <span className="line-clamp-1 text-white/90">
+      10 Trần Đình Châu, X. Hoài Ân, T. Gia Lai
+    </span>
+  </div>
+</div>
 
       <div className="border-b border-black/5 bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6 md:py-4">
           <a
             href="/"
-            className="text-xl font-semibold tracking-wide text-[#1F1F1F]"
+            className="text-base font-bold tracking-wide text-[#1F1F1F] md:text-xl"
           >
             DUY TOÀN WEDDING
           </a>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium text-[#1F1F1F] md:flex">
+          <nav className="hidden items-center gap-8 text-sm font-medium text-[#1F1F1F] lg:flex">
             <a href="/" className="transition hover:text-[#B99A5F]">
               Trang chủ
             </a>
@@ -109,36 +135,19 @@ export default function Header() {
                     </h3>
 
                     <div className="space-y-1 text-[15px] text-neutral-500">
-                      {[
-                        "Signature Concept",
-                        "Sample Concept",
-                        "Collection",
-                        "Beauty",
-                        "Gia đình",
-                        "Creative Style",
-                      ].map((item) => (
+                      {studioAlbums.map((item, index) => (
                         <a
                           key={item}
                           href="/album"
-                          className="block border-b border-neutral-100 py-2 transition hover:text-[#B99A5F]"
+                          className={`block py-2 transition hover:text-[#B99A5F] ${
+                            index < 6
+                              ? "border-b border-neutral-100"
+                              : "font-semibold text-neutral-700"
+                          }`}
                         >
                           {item}
                         </a>
                       ))}
-
-                      <a
-                        href="/album"
-                        className="block py-2 font-semibold text-neutral-700 transition hover:text-[#B99A5F]"
-                      >
-                        Phim Trường
-                      </a>
-
-                      <a
-                        href="/album"
-                        className="block py-2 font-semibold text-neutral-700 transition hover:text-[#B99A5F]"
-                      >
-                        Phóng Sự Cưới
-                      </a>
                     </div>
                   </div>
 
@@ -148,15 +157,7 @@ export default function Header() {
                     </h3>
 
                     <div className="space-y-3 text-[15px] font-semibold text-neutral-500">
-                      {[
-                        "Sài Gòn",
-                        "Đà Lạt",
-                        "Vĩnh Hy / Phú Quốc",
-                        "Hồ Cốc / Vũng Tàu / Phan Thiết",
-                        "Bình Dương",
-                        "Mỹ Tho",
-                        "Buôn Ma Thuột",
-                      ].map((item) => (
+                      {outdoorAlbums.map((item) => (
                         <a
                           key={item}
                           href="/album"
@@ -184,7 +185,7 @@ export default function Header() {
             </a>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             {searchOpen && (
               <div className="hidden items-center rounded-full border border-neutral-200 bg-white px-4 py-2 shadow-sm md:flex">
                 <input
@@ -197,13 +198,13 @@ export default function Header() {
                   }}
                   autoFocus
                   placeholder="Tìm kiếm..."
-                  className="w-44 bg-transparent text-sm font-medium text-[#1F1F1F] outline-none placeholder:font-medium placeholder:text-neutral-500"
+                  className="w-40 bg-transparent text-sm font-medium text-[#1F1F1F] outline-none placeholder:font-medium placeholder:text-neutral-500"
                 />
 
                 <button
                   type="button"
                   onClick={handleSearch}
-                  className="ml-2 text-sm font-semibold text-[#B99A5F]"
+                  className="ml-2 text-sm font-bold text-[#8A6A35] transition hover:text-[#B99A5F]"
                 >
                   Tìm
                 </button>
@@ -213,23 +214,32 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setSearchOpen((prev) => !prev)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-lg text-[#1F1F1F] transition hover:bg-[#FAF7F2]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E7DDCF] bg-[#FAF7F2] text-lg text-[#8A6A35] transition hover:bg-[#F2E8DA] hover:text-[#6F5429]"
               aria-label="Mở tìm kiếm"
             >
-              🔍
+              🔎
             </button>
 
             <a
               href="/lien-he"
-              className="rounded-full bg-[#1F1F1F] px-5 py-2 text-sm font-medium text-white transition hover:bg-black"
+              className="hidden rounded-full bg-[#1F1F1F] px-5 py-2 text-sm font-medium text-white transition hover:bg-black sm:inline-block"
             >
               Đặt lịch
             </a>
+
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1F1F1F] text-xl text-white lg:hidden"
+              aria-label="Mở menu"
+            >
+              {mobileMenuOpen ? "×" : "☰"}
+            </button>
           </div>
         </div>
 
         {searchOpen && (
-          <div className="border-t border-neutral-100 px-6 py-3 md:hidden">
+          <div className="border-t border-neutral-100 px-4 py-3 md:hidden">
             <div className="mx-auto flex max-w-7xl items-center rounded-full border border-neutral-200 bg-white px-4 py-3">
               <input
                 value={keyword}
@@ -240,16 +250,98 @@ export default function Header() {
                   }
                 }}
                 placeholder="Tìm album, dịch vụ, bảng giá..."
-                className="flex-1 bg-transparent text-sm outline-none placeholder:text-neutral-400"
+                className="flex-1 bg-transparent text-sm font-medium text-[#1F1F1F] outline-none placeholder:font-medium placeholder:text-neutral-500"
               />
 
               <button
                 type="button"
                 onClick={handleSearch}
-                className="ml-3 text-sm font-semibold text-[#B99A5F]"
+                className="ml-3 text-sm font-bold text-[#8A6A35] transition hover:text-[#B99A5F]"
               >
                 Tìm
               </button>
+            </div>
+          </div>
+        )}
+
+        {mobileMenuOpen && (
+          <div className="border-t border-neutral-100 bg-white px-4 py-4 lg:hidden">
+            <div className="mx-auto grid max-w-7xl gap-2 text-sm font-medium text-[#1F1F1F]">
+              <a
+                href="/"
+                className="rounded-2xl px-4 py-3 transition hover:bg-[#FAF7F2]"
+              >
+                Trang chủ
+              </a>
+
+              <button
+                type="button"
+                onClick={() => setMobileAlbumOpen((prev) => !prev)}
+                className="flex items-center justify-between rounded-2xl px-4 py-3 text-left transition hover:bg-[#FAF7F2]"
+              >
+                <span>Album</span>
+                <span>{mobileAlbumOpen ? "−" : "+"}</span>
+              </button>
+
+              {mobileAlbumOpen && (
+                <div className="rounded-2xl bg-[#FAF7F2] p-4">
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <div>
+                      <h4 className="mb-3 font-semibold text-neutral-700">
+                        Album Studio
+                      </h4>
+                      <div className="grid gap-2 text-sm text-neutral-600">
+                        {studioAlbums.map((item) => (
+                          <a key={item} href="/album">
+                            {item}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="mb-3 font-semibold text-neutral-700">
+                        Album Ngoại Cảnh
+                      </h4>
+                      <div className="grid gap-2 text-sm text-neutral-600">
+                        {outdoorAlbums.map((item) => (
+                          <a key={item} href="/album">
+                            {item}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <a
+                href="/dich-vu"
+                className="rounded-2xl px-4 py-3 transition hover:bg-[#FAF7F2]"
+              >
+                Dịch vụ
+              </a>
+
+              <a
+                href="/bang-gia"
+                className="rounded-2xl px-4 py-3 transition hover:bg-[#FAF7F2]"
+              >
+                Bảng giá
+              </a>
+
+              <a
+                href="/lien-he"
+                className="rounded-2xl px-4 py-3 transition hover:bg-[#FAF7F2]"
+              >
+                Liên hệ
+              </a>
+
+              <a
+                href="/lien-he"
+                className="mt-2 rounded-full bg-[#1F1F1F] px-5 py-3 text-center font-semibold text-white"
+              >
+                Đặt lịch tư vấn
+              </a>
             </div>
           </div>
         )}

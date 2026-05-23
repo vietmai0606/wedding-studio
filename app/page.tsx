@@ -69,7 +69,7 @@ const process = [
 export default function HomePage() {
   return (
     <main className="bg-[#FAF7F2] text-[#1F1F1F]">
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20 text-center">
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-32 text-center">
         <img
           src="/images/hero.jpg"
           alt="Ảnh cưới studio"
