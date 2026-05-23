@@ -5,7 +5,6 @@ import { useState } from "react";
 export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileAlbumOpen, setMobileAlbumOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
 
   function handleSearch() {
@@ -85,33 +84,44 @@ export default function Header() {
 
   return (
     <header className="fixed left-0 top-0 z-50 w-full bg-white shadow-sm">
-     <div className="bg-[#8f8f8f] px-4 py-2 text-white">
-  <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 text-[11px] font-medium sm:text-xs md:justify-start md:text-sm">
-    <a
-      href="tel:+84924733777"
-      className="shrink-0 transition hover:text-white/80"
-    >
-      0924 733 777
-    </a>
-
-    <span className="text-white/60">|</span>
-
-    <span className="line-clamp-1 text-white/90">
-      10 Trần Đình Châu, X. Hoài Ân, T. Gia Lai
-    </span>
-  </div>
-</div>
-
-      <div className="border-b border-black/5 bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6 md:py-4">
+      <div className="bg-[#8f8f8f] px-4 py-2 text-white">
+        <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 text-[11px] font-medium sm:text-xs md:justify-start md:text-sm">
           <a
-            href="/"
-            className="text-base font-bold tracking-wide text-[#1F1F1F] md:text-xl"
+            href="tel:+84924733777"
+            className="shrink-0 transition hover:text-white/80"
           >
-            DUY TOÀN WEDDING
+            0924 733 777
           </a>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium text-[#1F1F1F] lg:flex">
+          <span className="text-white/60">|</span>
+
+          <span className="line-clamp-1 text-white/90">
+            10 Trần Đình Châu, X. Hoài Ân, T. Gia Lai
+          </span>
+        </div>
+      </div>
+
+      <div className="border-b border-black/5 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
+          <div className="flex items-center">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="mr-3 flex h-10 w-10 items-center justify-center rounded-full text-3xl text-[#8f8f8f] transition hover:bg-[#FAF7F2] md:hidden"
+              aria-label="Mở menu"
+            >
+              {mobileMenuOpen ? "×" : "☰"}
+            </button>
+
+            <a
+              href="/"
+              className="text-base font-bold tracking-wide text-[#1F1F1F] md:text-xl"
+            >
+              DUY TOÀN WEDDING
+            </a>
+          </div>
+
+          <nav className="hidden items-center gap-8 text-sm font-medium text-[#1F1F1F] md:flex">
             <a href="/" className="transition hover:text-[#B99A5F]">
               Trang chủ
             </a>
@@ -198,7 +208,7 @@ export default function Header() {
                   }}
                   autoFocus
                   placeholder="Tìm kiếm..."
-                  className="w-40 bg-transparent text-sm font-medium text-[#1F1F1F] outline-none placeholder:font-medium placeholder:text-neutral-500"
+                  className="w-44 bg-transparent text-sm font-medium text-[#1F1F1F] outline-none placeholder:font-medium placeholder:text-neutral-500"
                 />
 
                 <button
@@ -226,15 +236,6 @@ export default function Header() {
             >
               Đặt lịch
             </a>
-
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1F1F1F] text-xl text-white lg:hidden"
-              aria-label="Mở menu"
-            >
-              {mobileMenuOpen ? "×" : "☰"}
-            </button>
           </div>
         </div>
 
@@ -265,7 +266,7 @@ export default function Header() {
         )}
 
         {mobileMenuOpen && (
-          <div className="border-t border-neutral-100 bg-white px-4 py-4 lg:hidden">
+          <div className="border-t border-neutral-100 bg-white px-4 py-4 md:hidden">
             <div className="mx-auto grid max-w-7xl gap-2 text-sm font-medium text-[#1F1F1F]">
               <a
                 href="/"
@@ -274,46 +275,12 @@ export default function Header() {
                 Trang chủ
               </a>
 
-              <button
-                type="button"
-                onClick={() => setMobileAlbumOpen((prev) => !prev)}
-                className="flex items-center justify-between rounded-2xl px-4 py-3 text-left transition hover:bg-[#FAF7F2]"
+              <a
+                href="/album"
+                className="rounded-2xl px-4 py-3 transition hover:bg-[#FAF7F2]"
               >
-                <span>Album</span>
-                <span>{mobileAlbumOpen ? "−" : "+"}</span>
-              </button>
-
-              {mobileAlbumOpen && (
-                <div className="rounded-2xl bg-[#FAF7F2] p-4">
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <div>
-                      <h4 className="mb-3 font-semibold text-neutral-700">
-                        Album Studio
-                      </h4>
-                      <div className="grid gap-2 text-sm text-neutral-600">
-                        {studioAlbums.map((item) => (
-                          <a key={item} href="/album">
-                            {item}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="mb-3 font-semibold text-neutral-700">
-                        Album Ngoại Cảnh
-                      </h4>
-                      <div className="grid gap-2 text-sm text-neutral-600">
-                        {outdoorAlbums.map((item) => (
-                          <a key={item} href="/album">
-                            {item}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
+                Album
+              </a>
 
               <a
                 href="/dich-vu"
