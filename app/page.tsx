@@ -97,7 +97,7 @@ export default function HomePage() {
 
   return (
     <main className="bg-[#FAF7F2] text-[#1F1F1F]">
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-32 text-center">
+      <section className="relative min-h-screen overflow-hidden">
         {heroImages.map((image, index) => (
           <img
             key={image}
@@ -109,7 +109,7 @@ export default function HomePage() {
           />
         ))}
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/60" />
+        <div className="absolute inset-0 bg-black/15" />
 
         <button
           type="button"
@@ -129,37 +129,24 @@ export default function HomePage() {
           ›
         </button>
 
-        <div className="relative z-10 mx-auto max-w-4xl text-white">
-          <p className="mb-5 text-sm uppercase tracking-[0.35em] text-[#E8D3A3]">
-            Duy Toàn Wedding
-          </p>
-
-          <h1 className="text-4xl font-semibold leading-tight tracking-[-0.03em] md:text-6xl">
-            Nơi câu chuyện tình yêu được lưu giữ trọn vẹn
-          </h1>
-
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-lg">
-            Chụp ảnh cưới, makeup cô dâu và album cưới với phong cách nhẹ
-            nhàng, sang trọng và đầy cảm xúc.
-          </p>
-
-          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+        <div className="absolute bottom-20 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-5">
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <a
               href="/album"
-              className="rounded-full bg-white px-8 py-4 text-sm font-semibold text-[#1F1F1F] transition hover:bg-[#FAF7F2]"
+              className="rounded-full bg-white px-8 py-4 text-sm font-semibold text-[#1F1F1F] shadow-lg transition hover:bg-[#FAF7F2]"
             >
               Xem album
             </a>
 
             <a
               href="/lien-he"
-              className="rounded-full border border-white px-8 py-4 text-sm font-semibold text-white transition hover:bg-white hover:text-[#1F1F1F]"
+              className="rounded-full border border-white bg-black/20 px-8 py-4 text-sm font-semibold text-white shadow-lg backdrop-blur-sm transition hover:bg-white hover:text-[#1F1F1F]"
             >
               Đặt lịch tư vấn
             </a>
           </div>
 
-          <div className="mt-8 flex justify-center gap-2">
+          <div className="flex justify-center gap-2">
             {heroImages.map((image, index) => (
               <button
                 key={image}

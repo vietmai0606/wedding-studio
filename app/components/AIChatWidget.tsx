@@ -10,16 +10,17 @@ type Message = {
 export default function AIChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bot",
-      text: "Xin chào! Tôi là trợ lý của Duy Toàn Wedding. Bạn cần tư vấn chụp ảnh cưới, váy cưới hay đặt lịch ạ?",
+      text: "Xin chào! Tôi là trợ lý của Duy Toàn Wedding. Bạn cần tư vấn chụp ảnh cưới, váy cưới, makeup hay đặt lịch ạ?",
     },
   ]);
 
-  function handleSend() {
-    if (!input.trim()) return;
+  async function handleSend() {
+    if (!input.trim() || isSending) return;
 
     const userMessage = input.trim();
 
@@ -32,17 +33,41 @@ export default function AIChatWidget() {
     ]);
 
     setInput("");
+    setIsSending(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: userMessage,
+        }),
+      });
+
+      const data = await response.json();
+
       setMessages((prev) => [
         ...prev,
         {
           role: "bot",
           text:
-            "Duy Toàn Wedding đã nhận thông tin của bạn. Bạn có thể để lại số điện thoại/Zalo hoặc bấm nút Zalo để được tư vấn nhanh nhất nhé.",
+            data.reply ||
+            "Xin lỗi, tôi chưa phản hồi được. Bạn có thể nhắn Zalo 0924 733 777 để được tư vấn nhanh nhất.",
         },
       ]);
-    }, 500);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "bot",
+          text: "Xin lỗi, trợ lý đang gặp lỗi kết nối. Bạn có thể gọi hoặc nhắn Zalo 0924 733 777 nhé.",
+        },
+      ]);
+    } finally {
+      setIsSending(false);
+    }
   }
 
   return (
@@ -51,7 +76,7 @@ export default function AIChatWidget() {
         <div className="fixed bottom-24 left-5 z-[60] w-[calc(100vw-40px)] max-w-[430px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#202020] text-white shadow-2xl">
           <div className="flex items-center justify-between border-b border-white/10 bg-black px-5 py-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0068FF] text-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-xl">
                 🤖
               </div>
 
@@ -73,8 +98,8 @@ export default function AIChatWidget() {
 
           <div className="h-[420px] overflow-y-auto px-5 py-5">
             <div className="mb-6 text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#0FCF65]/15 text-2xl">
-                ✨
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl">
+                🤖
               </div>
 
               <h4 className="text-xl font-semibold">Trợ Lý AI 24/7</h4>
@@ -103,6 +128,14 @@ export default function AIChatWidget() {
                   </div>
                 </div>
               ))}
+
+              {isSending && (
+                <div className="flex justify-start">
+                  <div className="max-w-[85%] rounded-2xl bg-white/10 px-4 py-3 text-sm leading-6 text-white/70">
+                    Đang trả lời...
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -116,7 +149,7 @@ export default function AIChatWidget() {
               </a>
 
               <a
-                href="https://zalo.me/84924733777"
+                href="https://zalo.me/0924733777"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-full bg-[#0068FF] px-4 py-3 text-center text-sm font-semibold text-white transition hover:opacity-90"
@@ -141,7 +174,8 @@ export default function AIChatWidget() {
               <button
                 type="button"
                 onClick={handleSend}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0068FF] text-sm font-semibold text-white transition hover:opacity-90"
+                disabled={isSending}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0068FF] text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                 aria-label="Gửi tin nhắn"
               >
                 ➤
@@ -154,10 +188,10 @@ export default function AIChatWidget() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 left-5 z-[60] flex h-16 w-16 items-center justify-center rounded-full bg-black text-2xl text-white shadow-2xl transition hover:scale-105"
+        className="fixed bottom-5 left-5 z-[60] flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl shadow-2xl transition hover:scale-105"
         aria-label="Mở trợ lý chat"
       >
-        {open ? "×" : "🤖"}
+        {open ? <span className="text-3xl text-black">×</span> : "🤖"}
       </button>
     </>
   );
