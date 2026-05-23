@@ -3,11 +3,12 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import FloatingContact from "./components/FloatingContact";
+import AIChatWidget from "./components/AIChatWidget";
 
 export const metadata: Metadata = {
-  title: "Hana Wedding Studio",
+  title: "Duy Toàn Wedding - Studio chụp ảnh cưới tại Gia Lai",
   description:
-    "Studio chụp ảnh cưới chuyên nghiệp với phong cách sang trọng, nhẹ nhàng và đầy cảm xúc.",
+    "Duy Toàn Wedding chuyên chụp ảnh cưới, makeup cô dâu, váy cưới và album cưới tại Hoài Ân, Gia Lai.",
 };
 
 export default function RootLayout({
@@ -22,6 +23,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <FloatingContact />
+        <AIChatWidget />
       </body>
     </html>
   );
