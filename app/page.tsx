@@ -1,3 +1,15 @@
+"use client";
+
+import { useState } from "react";
+
+const heroImages = [
+  "/images/hero.jpg",
+  "/images/hero1.jpg",
+  "/images/hero2.jpg",
+  "/images/hero3.jpg",
+  "/images/hero4.jpg",
+];
+
 const services = [
   "Chụp ảnh cưới studio",
   "Chụp ảnh cưới ngoại cảnh",
@@ -31,32 +43,34 @@ const albums = [
     image: "/images/album-6.jpg",
   },
 ];
+
 const weddingAlbums = [
   {
-    title: "Album cưới 01",
+    title: "Album ảnh cưới 01",
     image: "/images/wedding-1.jpg",
   },
   {
-    title: "Album cưới 02",
+    title: "Album ảnh cưới 02",
     image: "/images/wedding-2.jpg",
   },
   {
-    title: "Album cưới 03",
+    title: "Album ảnh cưới 03",
     image: "/images/wedding-3.jpg",
   },
   {
-    title: "Album cưới 04",
+    title: "Album ảnh cưới 04",
     image: "/images/wedding-4.jpg",
   },
   {
-    title: "Album cưới 05",
+    title: "Album ảnh cưới 05",
     image: "/images/wedding-5.jpg",
   },
   {
-    title: "Album cưới 06",
+    title: "Album ảnh cưới 06",
     image: "/images/wedding-6.jpg",
   },
 ];
+
 const process = [
   "Tư vấn concept",
   "Chọn gói chụp",
@@ -67,29 +81,66 @@ const process = [
 ];
 
 export default function HomePage() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  function goToPrevious() {
+    setCurrentIndex((prev) =>
+      prev === 0 ? heroImages.length - 1 : prev - 1
+    );
+  }
+
+  function goToNext() {
+    setCurrentIndex((prev) =>
+      prev === heroImages.length - 1 ? 0 : prev + 1
+    );
+  }
+
   return (
     <main className="bg-[#FAF7F2] text-[#1F1F1F]">
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-32 text-center">
-        <img
-          src="/images/hero.jpg"
-          alt="Ảnh cưới studio"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+        {heroImages.map((image, index) => (
+          <img
+            key={image}
+            src={image}
+            alt={`Ảnh cưới Duy Toàn Wedding ${index + 1}`}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
 
-        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/60" />
 
-        <div className="relative z-10 mx-auto max-w-5xl text-white">
+        <button
+          type="button"
+          onClick={goToPrevious}
+          className="absolute left-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-2xl font-semibold text-[#1F1F1F] shadow-lg transition hover:bg-white md:left-8"
+          aria-label="Ảnh trước"
+        >
+          ‹
+        </button>
+
+        <button
+          type="button"
+          onClick={goToNext}
+          className="absolute right-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-2xl font-semibold text-[#1F1F1F] shadow-lg transition hover:bg-white md:right-8"
+          aria-label="Ảnh tiếp theo"
+        >
+          ›
+        </button>
+
+        <div className="relative z-10 mx-auto max-w-4xl text-white">
           <p className="mb-5 text-sm uppercase tracking-[0.35em] text-[#E8D3A3]">
-            Wedding Studio
+            Duy Toàn Wedding
           </p>
 
-          <h1 className="text-4xl font-semibold leading-tight md:text-7xl">
-            Lưu giữ câu chuyện tình yêu bằng những khung hình tinh tế
+          <h1 className="text-4xl font-semibold leading-tight tracking-[-0.03em] md:text-6xl">
+            Nơi câu chuyện tình yêu được lưu giữ trọn vẹn
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/80">
-            Studio chụp ảnh cưới chuyên nghiệp với phong cách nhẹ nhàng, sang
-            trọng và đầy cảm xúc dành cho các cặp đôi.
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/85 md:text-lg">
+            Chụp ảnh cưới, makeup cô dâu và album cưới với phong cách nhẹ
+            nhàng, sang trọng và đầy cảm xúc.
           </p>
 
           <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
@@ -106,6 +157,22 @@ export default function HomePage() {
             >
               Đặt lịch tư vấn
             </a>
+          </div>
+
+          <div className="mt-8 flex justify-center gap-2">
+            {heroImages.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2.5 rounded-full transition-all ${
+                  index === currentIndex
+                    ? "w-8 bg-white"
+                    : "w-2.5 bg-white/50 hover:bg-white/80"
+                }`}
+                aria-label={`Chuyển đến ảnh ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -129,9 +196,10 @@ export default function HomePage() {
           </h2>
 
           <p className="mt-6 leading-8 text-neutral-600">
-            Chúng tôi đồng hành cùng các cặp đôi từ khâu lựa chọn concept,
-            trang phục, makeup đến hoàn thiện album cưới. Mỗi khung hình đều
-            được chăm chút để giữ lại cảm xúc tự nhiên và chân thật nhất.
+            Duy Toàn Wedding đồng hành cùng các cặp đôi từ khâu lựa chọn
+            concept, trang phục, makeup đến hoàn thiện album cưới. Mỗi khung
+            hình đều được chăm chút để giữ lại cảm xúc tự nhiên và chân thật
+            nhất.
           </p>
 
           <div className="mt-8 grid grid-cols-3 gap-4">
@@ -141,8 +209,8 @@ export default function HomePage() {
             </div>
 
             <div>
-              <p className="text-3xl font-semibold">1000+</p>
-              <p className="mt-1 text-sm text-neutral-500">Cặp đôi</p>
+              <p className="text-3xl font-semibold">100+</p>
+              <p className="mt-1 text-sm text-neutral-500">Album cưới</p>
             </div>
 
             <div>
@@ -219,6 +287,49 @@ export default function HomePage() {
           >
             Xem toàn bộ album
           </a>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-center text-sm uppercase tracking-[0.35em] text-[#B99A5F]">
+            Wedding Album
+          </p>
+
+          <h2 className="mt-4 text-center text-3xl font-semibold md:text-5xl">
+            Album ảnh cưới
+          </h2>
+
+          <p className="mx-auto mt-5 max-w-2xl text-center leading-8 text-neutral-600">
+            Những khoảnh khắc cưới được Duy Toàn Wedding lưu giữ với phong cách
+            tự nhiên, tinh tế và đầy cảm xúc.
+          </p>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {weddingAlbums.map((album) => (
+              <div
+                key={album.title}
+                className="group overflow-hidden rounded-[2rem] bg-[#FAF7F2] shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={album.image}
+                    alt={album.title}
+                    className="h-80 w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold">{album.title}</h3>
+
+                  <p className="mt-2 text-sm leading-6 text-neutral-600">
+                    Bộ ảnh cưới ghi lại những cảm xúc tự nhiên và đáng nhớ của
+                    cô dâu chú rể.
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
