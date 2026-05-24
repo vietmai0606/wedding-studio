@@ -10,14 +10,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
-
-    if (!apiKey) {
-      return Response.json({
-        reply:
-          "Trợ lý chưa được cấu hình Gemini API key. Bạn có thể gọi hoặc nhắn Zalo 0924 733 777 để được tư vấn nhanh nhất.",
-      });
-    }
+    const apiKey = "AIzaSyBaRyfFBo8GYD5hef0LBE3tl-e20DvSSeY";
 
     const systemPrompt = `
 Bạn là trợ lý tư vấn của Duy Toàn Wedding.
@@ -34,12 +27,10 @@ Cách trả lời:
 - Luôn trả lời bằng tiếng Việt.
 - Giọng thân thiện, lịch sự, tự nhiên như nhân viên tư vấn.
 - Trả lời ngắn gọn, dễ hiểu, không quá dài.
-- Tập trung tư vấn dịch vụ cưới của Duy Toàn Wedding.
 - Không bịa giá cụ thể nếu khách hỏi giá.
 - Nếu khách hỏi giá, hãy mời khách để lại số điện thoại/Zalo hoặc nhắn Zalo 0924 733 777.
 - Nếu khách muốn đặt lịch, hãy hỏi họ tên, số điện thoại/Zalo, ngày dự kiến chụp và dịch vụ quan tâm.
 - Nếu khách hỏi địa chỉ, hãy trả lời địa chỉ studio rõ ràng.
-- Nếu khách hỏi ngoài phạm vi studio cưới, trả lời ngắn gọn rồi kéo về nhu cầu tư vấn cưới.
 `;
 
     const response = await fetch(
@@ -69,6 +60,15 @@ Cách trả lời:
     );
 
     const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Gemini API error:", data);
+
+      return Response.json({
+        reply:
+          "Trợ lý đang gặp lỗi kết nối AI. Bạn có thể gọi hoặc nhắn Zalo 0924 733 777 để được tư vấn nhanh nhất.",
+      });
+    }
 
     const reply =
       data?.candidates?.[0]?.content?.parts?.[0]?.text ||
