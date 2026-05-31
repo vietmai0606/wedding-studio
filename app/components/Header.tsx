@@ -6,6 +6,7 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
+  const [logoError, setLogoError] = useState(false);
 
   function handleSearch() {
     const text = keyword.toLowerCase().trim();
@@ -61,27 +62,6 @@ export default function Header() {
     window.location.href = "/album";
   }
 
-  const studioAlbums = [
-    "Signature Concept",
-    "Sample Concept",
-    "Collection",
-    "Beauty",
-    "Gia đình",
-    "Creative Style",
-    "Phim Trường",
-    "Phóng Sự Cưới",
-  ];
-
-  const outdoorAlbums = [
-    "Sài Gòn",
-    "Đà Lạt",
-    "Vĩnh Hy / Phú Quốc",
-    "Hồ Cốc / Vũng Tàu / Phan Thiết",
-    "Bình Dương",
-    "Mỹ Tho",
-    "Buôn Ma Thuột",
-  ];
-
   return (
     <header className="fixed left-0 top-0 z-50 w-full bg-white shadow-sm">
       <div className="bg-[#8f8f8f] px-4 py-2 text-white">
@@ -102,7 +82,7 @@ export default function Header() {
       </div>
 
       <div className="border-b border-black/5 bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
           <div className="flex items-center">
             <button
               type="button"
@@ -113,11 +93,19 @@ export default function Header() {
               {mobileMenuOpen ? "×" : "☰"}
             </button>
 
-            <a
-              href="/"
-              className="text-base font-bold tracking-wide text-[#1F1F1F] md:text-xl"
-            >
-              DUY TOÀN WEDDING
+            <a href="/" className="flex items-center gap-3">
+              {!logoError && (
+                <img
+                  src="/images/logo-duytoan.png"
+                  alt=""
+                  onError={() => setLogoError(true)}
+                  className="h-10 w-auto object-contain md:h-12"
+                />
+              )}
+
+              <span className="text-base font-bold tracking-wide text-[#1F1F1F] md:text-xl">
+                DUY TOÀN WEDDING
+              </span>
             </a>
           </div>
 
@@ -145,7 +133,16 @@ export default function Header() {
                     </h3>
 
                     <div className="space-y-1 text-[15px] text-neutral-500">
-                      {studioAlbums.map((item, index) => (
+                      {[
+                        "Signature Concept",
+                        "Sample Concept",
+                        "Collection",
+                        "Beauty",
+                        "Gia đình",
+                        "Creative Style",
+                        "Phim Trường",
+                        "Phóng Sự Cưới",
+                      ].map((item, index) => (
                         <a
                           key={item}
                           href="/album"
@@ -167,7 +164,15 @@ export default function Header() {
                     </h3>
 
                     <div className="space-y-3 text-[15px] font-semibold text-neutral-500">
-                      {outdoorAlbums.map((item) => (
+                      {[
+                        "Sài Gòn",
+                        "Đà Lạt",
+                        "Vĩnh Hy / Phú Quốc",
+                        "Hồ Cốc / Vũng Tàu / Phan Thiết",
+                        "Bình Dương",
+                        "Mỹ Tho",
+                        "Buôn Ma Thuột",
+                      ].map((item) => (
                         <a
                           key={item}
                           href="/album"
